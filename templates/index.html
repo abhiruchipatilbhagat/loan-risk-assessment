@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             /* background-color: #108a43; */
             color: #2a2a2a;
@@ -24,18 +26,21 @@
             align-items: center;
             gap: 10rem;
         }
+
         header h1 {
             margin: 0;
-            font-size: 2em;
+            font-size: 2rem;
         }
+
         .container {
-            width: 60%;
+            width: 50%;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .note {
             background-color: #ffffe0;
             border: 1px solid #dcdcdc;
@@ -45,18 +50,24 @@
             font-size: 14px;
             color: #666;
         }
+
         h2 {
             color: #003366;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         label {
             margin: 10px 0 5px;
             font-weight: bold;
         }
-        select, input[type="text"] {
+
+        select,
+        input[type="text"],
+        input[type="tel"] {
             width: full;
             padding: 12px;
             border: 1px solid #cccccc;
@@ -65,6 +76,7 @@
             margin-bottom: 15px;
             font-size: 16px;
         }
+
         input[type="submit"] {
             background-color: #003366;
             color: #ffffff;
@@ -74,26 +86,111 @@
             cursor: pointer;
             font-size: 16px;
         }
+
         input[type="submit"]:hover {
             background-color: #002244;
         }
+
+        #personal {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group input {
+            height: 24px;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        @media (min-width: 768px) {
+
+            #name,
+            #phone {
+                flex: 1 0 48%;
+            }
+
+            #sex,
+            #age {
+                flex: 1 0 48%;
+            }
+
+            #address {
+                flex: 1 0 80%;
+                margin-bottom: 90px;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
-                width: 95%;
+                width: 80%;
+            }
+            .input-group {
+                flex: 1 0 100%;
             }
         }
     </style>
 </head>
+
 <body>
     <header>
-        <img src="https://www.tvscredit.com/wp-content/uploads/2023/07/tvs_credit_logo.png" alt="TVS Credit Logo" class="img-fluid">
+        <img src="https://www.tvscredit.com/wp-content/uploads/2023/07/tvs_credit_logo.png" alt="TVS Credit Logo"
+            class="img-fluid">
         <h1>Loan Risk Evaluation</h1>
     </header>
     <div class="container">
         <div class="note">
-            NOTE: The values and parameters used in this sample demonstration are based on the UCI dataset. This illustration is intended to showcase how the risk evaluation process will function. In the development of the prototype, we will integrate a more detailed dataset and refine our evaluation methodology to enhance accuracy. This will involve defining thresholds and implementing a multi-stage risk assessment approach tailored to diverse loan products and applicant profiles.
+            NOTE: The values and parameters used in this sample demonstration are based on the UCI dataset. This
+            illustration is intended to showcase how the risk evaluation process will function. In the development of
+            the prototype, we will integrate a more detailed dataset and refine our evaluation methodology to enhance
+            accuracy. This will involve defining thresholds and implementing a multi-stage risk assessment approach
+            tailored to diverse loan products and applicant profiles.
         </div>
         <form action="/predict" method="post">
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                <h2>Personal&nbsp;Details</h2>
+                <div style="width: 100%; height: 1px ; background-color: #003366; margin: 20px;"></div>
+            </div>
+            <div id="personal">
+                <div class="input-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="sex">Sex:</label>
+                    <select id="sex" name="sex" required>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="age">Age (Years):</label>
+                    <input type="text" id="age" name="age">
+                </div>
+
+                <div class="input-group">
+                    <label for="address">Address:</label>
+                    <input type="text" id="address" name="address" required>
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                <h2>Loan&nbsp;Details</h2>
+                <div style="width: 100%; height: 1px ; background-color: #003366; margin: 20px;"></div>
+            </div>
             <label for="status">Status of Existing Account:</label>
             <select id="status" name="status">
                 <option value="1">Less than ₹5,000</option>
@@ -180,9 +277,6 @@
                 <option value="4">No property</option>
             </select>
 
-            <label for="age">Age (Years):</label>
-            <input type="text" id="age" name="age">
-
             <label for="other_installment_plans">Other Instalment Plans:</label>
             <select id="other_installment_plans" name="other_installment_plans">
                 <option value="1">Bank</option>
@@ -228,4 +322,5 @@
         <h2>{{ prediction_text }}</h2>
     </div>
 </body>
+
 </html>
