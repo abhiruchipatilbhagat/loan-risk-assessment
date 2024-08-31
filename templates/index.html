@@ -13,17 +13,23 @@
             padding: 0;
         }
         header {
-            background-color: #003366;
-            color: #ffffff;
+            /* background-color: #108a43; */
+            color: #2a2a2a;
             padding: 15px 0;
             text-align: center;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            gap: 10rem;
         }
         header h1 {
             margin: 0;
             font-size: 2em;
         }
         .container {
-            width: 80%;
+            width: 60%;
             margin: 20px auto;
             padding: 20px;
             background-color: #ffffff;
@@ -51,10 +57,11 @@
             font-weight: bold;
         }
         select, input[type="text"] {
-            width: 100%;
+            width: full;
             padding: 12px;
             border: 1px solid #cccccc;
-            border-radius: 4px;
+            background-color: white;
+            border-radius: 10px;
             margin-bottom: 15px;
             font-size: 16px;
         }
@@ -63,7 +70,7 @@
             color: #ffffff;
             border: none;
             padding: 12px;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
         }
@@ -79,7 +86,8 @@
 </head>
 <body>
     <header>
-        <h1>TVS Credit - Loan Risk Evaluation</h1>
+        <img src="https://www.tvscredit.com/wp-content/uploads/2023/07/tvs_credit_logo.png" alt="TVS Credit Logo" class="img-fluid">
+        <h1>Loan Risk Evaluation</h1>
     </header>
     <div class="container">
         <div class="note">
