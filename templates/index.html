@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVS Credit - Loan Risk Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #003366;
+            color: #ffffff;
+            padding: 15px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .note {
+            background-color: #ffffe0;
+            border: 1px solid #dcdcdc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        h2 {
+            color: #003366;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #003366;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #002244;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TVS Credit - Loan Risk Evaluation</h1>
+    </header>
+    <div class="container">
+        <div class="note">
+            NOTE: The values and parameters used in this sample demonstration are based on the UCI dataset. This illustration is intended to showcase how the risk evaluation process will function. In the development of the prototype, we will integrate a more detailed dataset and refine our evaluation methodology to enhance accuracy. This will involve defining thresholds and implementing a multi-stage risk assessment approach tailored to diverse loan products and applicant profiles.
+        </div>
+        <form action="/predict" method="post">
+            <label for="status">Status of Existing Account:</label>
+            <select id="status" name="status">
+                <option value="1">Less than ₹5,000</option>
+                <option value="2">Less than ₹50,000</option>
+                <option value="3">₹50,000 or more</option>
+                <option value="4">No existing Account</option>
+            </select>
+
+            <label for="duration">Loan Duration (Months):</label>
+            <input type="text" id="duration" name="duration">
+
+            <label for="credit_history">Credit History:</label>
+            <select id="credit_history" name="credit_history">
+                <option value="0">No credits taken so far</option>
+                <option value="1">All credit in this Bank paid back duly</option>
+                <option value="2">Existing credits paid back duly till now</option>
+                <option value="3">Delay in paying off in the past</option>
+                <option value="4">Credits existing in other banks</option>
+            </select>
+
+            <label for="purpose">Loan Purpose:</label>
+            <select id="purpose" name="purpose">
+                <option value="0">New car purchase</option>
+                <option value="1">Used car purchase</option>
+                <option value="2">Furniture or equipment purchase</option>
+                <option value="3">Radio or television purchase</option>
+                <option value="4">Domestic appliances purchase</option>
+                <option value="5">Repairs</option>
+                <option value="6">Education</option>
+                <option value="7">Vacation</option>
+                <option value="8">Retraining</option>
+                <option value="9">Business</option>
+                <option value="10">Others</option>
+            </select>
+
+            <label for="amount">Credit Amount (₹):</label>
+            <input type="text" id="amount" name="amount">
+
+            <label for="savings">Bonds / Savings:</label>
+            <select id="savings" name="savings">
+                <option value="1">Less than ₹10,000</option>
+                <option value="2">₹10,000 to less than ₹50,000</option>
+                <option value="3">₹50,000 to ₹1,00,000</option>
+                <option value="4">₹1,00,000 or more</option>
+                <option value="5">No savings / bonds</option>
+            </select>
+
+            <label for="employment_duration">Present Employment Duration:</label>
+            <select id="employment_duration" name="employment_duration">
+                <option value="1">Unemployed</option>
+                <option value="2">Less than 1 year</option>
+                <option value="3">1 year to less than 4 years</option>
+                <option value="4">4 years to less than 7 years</option>
+                <option value="5">7 years or more</option>
+            </select>
+
+            <label for="installment_rate">Installment Rate (% of Disposable Income):</label>
+            <input type="text" id="installment_rate" name="installment_rate">
+
+            <label for="personal_status_sex">Personal Status and Sex:</label>
+            <select id="personal_status_sex" name="personal_status_sex">
+                <option value="1">Divorced Male</option>
+                <option value="2">Divorced/Married Female</option>
+                <option value="3">Male Single</option>
+                <option value="4">Married Male</option>
+                <option value="5">Female Single</option>
+            </select>
+
+            <label for="other_debtors">Other Debtors / Guarantors:</label>
+            <select id="other_debtors" name="other_debtors">
+                <option value="1">None</option>
+                <option value="2">Co-applicant</option>
+                <option value="3">Guarantor</option>
+            </select>
+
+            <label for="present_residence">Present Residence Duration (Years):</label>
+            <input type="text" id="present_residence" name="present_residence">
+
+            <label for="property">Property:</label>
+            <select id="property" name="property">
+                <option value="1">Real Estate</option>
+                <option value="2">Life Insurance</option>
+                <option value="3">Car or others</option>
+                <option value="4">No property</option>
+            </select>
+
+            <label for="age">Age (Years):</label>
+            <input type="text" id="age" name="age">
+
+            <label for="other_installment_plans">Other Instalment Plans:</label>
+            <select id="other_installment_plans" name="other_installment_plans">
+                <option value="1">Bank</option>
+                <option value="2">Stores</option>
+                <option value="3">None</option>
+            </select>
+
+            <label for="housing">Housing:</label>
+            <select id="housing" name="housing">
+                <option value="1">Rented</option>
+                <option value="2">Owned</option>
+                <option value="3">For Free</option>
+            </select>
+
+            <label for="number_credits">Number of Existing Credits at This Bank:</label>
+            <input type="text" id="number_credits" name="number_credits">
+
+            <label for="job">Job Status:</label>
+            <select id="job" name="job">
+                <option value="1">Unemployed non-resident</option>
+                <option value="2">Unemployed resident</option>
+                <option value="3">Skilled Employee</option>
+                <option value="4">Self-Employed</option>
+            </select>
+
+            <label for="people_liable">Number of People Dependent on You:</label>
+            <input type="text" id="people_liable" name="people_liable">
+
+            <label for="telephone">Telephone:</label>
+            <select id="telephone" name="telephone">
+                <option value="0">Not Available</option>
+                <option value="1">Available</option>
+            </select>
+
+            <label for="foreign_worker">Foreign Worker:</label>
+            <select id="foreign_worker" name="foreign_worker">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <input type="submit" value="Evaluate Risk">
+        </form>
+        <h2>{{ prediction_text }}</h2>
+    </div>
+</body>
+</html>
